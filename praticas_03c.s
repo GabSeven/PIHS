@@ -19,7 +19,6 @@
 
 .section .text
 .globl _start
-_start:
 
 _1aForma:
   pushl $abertura
@@ -75,12 +74,72 @@ _1aForma:
   pushl $0
   call exit
 
+
+_start:
+
 _2aForma:
   pushl $abertura
   call printf
 
+  movl $v1, %edi
+  
   pushl $peden1 # empilha mensagem com o endereço da mensagem de pedido
   call printf # e chama o printf para imprimir a mensagem
   pushl $n1 # empilha o endereço da variável
   pushl $formato # empilha o formato do dado a ser lido
   call scanf # chama scanf para faze a leitura na variável
+
+  movl
+  movl (%edi), %eax
+  addl $4, %edi
+
+  pushl $peden2 
+  call printf 
+  pushl %edi 
+  pushl $formato 
+  call scanf 
+
+  addl (%edi), %eax
+  addl $4, %edi
+
+  pushl $peden3 # empilha mensagem com o endereço da mensagem de pedido
+  call printf # e chama o printf para imprimir a mensagem
+  pushl %edi  # empilha o endereço da variável
+  pushl $formato # empilha o formato do dado a ser lido
+  call scanf # chama scanf para faze a leitura na variável
+
+  subl (%edi), %eax
+  addl $4, %edi
+
+  pushl $peden4 # empilha mensagem com o endereço da mensagem de pedido
+  call printf # e chama o printf para imprimir a mensagem
+  pushl %edi  # empilha o endereço da variável
+  pushl $formato # empilha o formato do dado a ser lido
+  call scanf # chama scanf para faze a leitura na variável
+
+  addl (%edi), %eax
+  addl $4, %edi
+
+  pushl $peden5 # empilha mensagem com o endereço da mensagem de pedido
+  call printf # e chama o printf para imprimir a mensagem
+  pushl %edi  # empilha o endereço da variável
+  pushl $formato # empilha o formato do dado a ser lido
+  call scanf # chama scanf para faze a leitura na variável
+
+
+  subl (%edi), %eax
+  movl %eax, res
+
+
+  pushl res
+  pushl n5
+  pushl n4
+  pushl n3
+  pushl n2
+  pushl n1
+  pushl $saida
+  call printf
+  addl $92, %esp # remova os últimos 23 elementos de 4 bytes empilhados
+
+  pushl $0
+  call exit
